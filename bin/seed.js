@@ -16,7 +16,7 @@ users = [{
   firstname : 'Timon',
   lastname : 'Gomez',
   fullname : 'Timon Gomez',
-  profilePic : 'assets/timon.jpg',
+  profilePic : 'timon.jpg',
   students : []
 },{
   username : 'parent2',
@@ -25,7 +25,7 @@ users = [{
   firstname : 'Pamela',
   lastname : 'Dunn',
   fullname : 'Pamela Anne Dunn',
-  profilePic : 'assets/pamela.jpg',
+  profilePic : 'pamela.jpg',
   students : []
 },{
   username : 'parent3',
@@ -34,7 +34,7 @@ users = [{
   firstname : 'Dana',
   lastname : 'Holmes',
   fullname : 'Dana Holmes',
-  profilePic : 'assets/dana.jpg',
+  profilePic : 'dana.jpg',
   students : []
 },{
   username : 'student1',
@@ -43,7 +43,7 @@ users = [{
   firstname : 'Sally',
   lastname : 'Gomez',
   fullname : 'Sally Gomez',
-  profilePic : 'assets/sally.jpg',
+  profilePic : 'sally.jpg',
   schoolname : 'Dade Middle School',
   parents : [],
   teachers : []
@@ -54,7 +54,7 @@ users = [{
   firstname : 'Raphael',
   lastname : 'Gomez',
   fullname : 'Raphael Gomez',
-  profilePic : 'assets/raphael.jpg',
+  profilePic : 'raphael.jpg',
   schoolname : 'Dade High School',
   parents : [],
   teachers : []
@@ -65,7 +65,7 @@ users = [{
   firstname : 'Benjamin',
   lastname : 'Dunn',
   fullname : 'Benjamin Dunn',
-  profilePic : 'assets/benjamin.jpg',
+  profilePic : 'benjamin.jpg',
   schoolname : 'Dade High School',
   parents : [],
   teachers : []
@@ -76,7 +76,7 @@ users = [{
   firstname : 'Brendan',
   lastname : 'Holmes',
   fullname : 'Brendan Holmes',
-  profilePic : 'assets/brendan.jpg',
+  profilePic : 'brendan.jpg',
   schoolname : 'Dade Middle School',
   parents : [],
   teachers : []
@@ -87,7 +87,7 @@ users = [{
   firstname : 'Samantha',
   lastname : 'Blueberry',
   fullname : 'Ms. Blueberry',
-  profilePic : 'assets/blueberry.jpg',
+  profilePic : 'blueberry.jpg',
   schoolname : 'Dade Middle School',
   subject : 'Math',
   students : [],
@@ -99,7 +99,7 @@ users = [{
   firstname : 'Terrance',
   lastname : 'Pistachie',
   fullname : 'The Pistachio',
-  profilePic : 'assets/pistachio.jpg',
+  profilePic : 'pistachio.jpg',
   schoolname : 'Dade High School',
   subject : 'History',
   students : [],
