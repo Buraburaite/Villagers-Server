@@ -10,26 +10,26 @@ This program is meant to sketch out a solution to the above problem, not be the 
 
 ---
 
-<i>This is the front-end portion of the Villagers web-app.</i>
+<i>This is the back-end portion of the Villagers web-app. The master branch is hosted on villagers.co</i>
 
-# Villagers-Client - Front-end written with Angular 2
+# Villagers-Server - Back-end written with Express, MongoDB, and NodeJS
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg?style=flat-square)](https://github.com/Buraburaite/Villagers-Client)
 
 ## Installation
 ### From source
 In your preferred working directory, get a copy of this repository:<br>
 ```
-git clone https://github.com/Buraburaite/Villagers-Client
-cd Villagers-Client
+git clone https://github.com/Buraburaite/Villagers-Server
+cd Villagers-Server
 ```
 Install any dependencies (you will need to install NodeJS in order to run this command):<br>
 ```
 npm install
 ```
+Finally, run the development server:<br>
+```
+npm run dev
+```
 
-## Run the Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0-rc.1.
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+This project was generated with IronGenerator (https://www.npmjs.com/package/iron-generator)

@@ -9,7 +9,7 @@ const mongoose     = require('mongoose');
 const dotenv       = require('dotenv');
 const cors         = require('cors');
 const session      = require('express-session');
-const MongoStore     = require('connect-mongo')(session);
+const MongoStore   = require('connect-mongo')(session);
 
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI);
