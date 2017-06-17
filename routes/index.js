@@ -52,6 +52,7 @@ router.post('/login', (req, res, next) => {
 
   });
 
+  // not sure this is secure, we're not checking a user object yet I think?
   router.get('/posts/:id', (req, res, next) => {
     const id = req.params.id;
 

@@ -31,7 +31,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
-if (process.env.NODE_ENV !== 'production') {
+
+// If we're in development, expose our database to angular's port
+if (process.env.NODE_ENV === 'development') {
   app.use(cors({
     credentials: true,
     origin: ['http://localhost:4200', 'http://localhost:8000']
