@@ -6,7 +6,58 @@ const User       = require('../models/user-model');
 
 const authRoutes = Router();
 
+//======================================================================== LOGIN
+// Route for securely logging in a user
+authRoutes.post('/login', (req, res, next) => {
 
+  // Passport's local strategy makes it pretty simple
+  passport.authenticate('local', (err, theUser, failureDetails) => {
+    // Was there an error with the authentication function?
+    if (err) {
+      res.status(500).json({ message: 'Something went wrong' });
+      return;
+    }
+
+    // If not, then a user object should have been found
+    if (!theUser) {
+      res.status(401).json(failureDetails);
+      return;
+    }
+
+    // If one was found, then log the user
+    req.login(theUser, (err) => { // passport attaches this function to req
+      if (err) {
+        res.status(500).json({ message: 'Something went wrong' });
+        return;
+      }
+
+      // If it got to this point, it worked, so respond with the user as json
+      res.status(200).json(req.user); // passport already attached user to req
+    });
+  }(req, res, next);
+});
+
+//======================================================================= LOGOUT
+// Route for logging out a user
+authRoutes.post('/logout', (req, res, next) => {
+  req.logout(); // passport function
+  res.status(200).json({ message: 'Successful logout' });
+});
+
+//==================================================================== LOGGED IN
+// Route for checking if a user is still logged in
+authRoutes.get('/loggedin', (req, res, next) => {
+  // If so...
+  if (req.isAuthenticated()) { // passport function
+    res.status(200).json(req.user); // ...respond with the user object...
+    return;
+  }
+
+  // Else, send an error response
+  res.status(403).json({ message: 'Unauthorized' });
+});
+
+//======================================================================= SIGNUP
 // Route for signing up a new, unique user, securely
 authRoutes.post('/signup', (req, res, next) => {
 

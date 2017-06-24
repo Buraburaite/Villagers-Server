@@ -10,9 +10,6 @@ const dotenv       = require('dotenv');
 const cors         = require('cors');
 const session      = require('express-session');
 const MongoStore   = require('connect-mongo')(session);
-
-
-
 const passport     = require('passport');
 
 dotenv.config();
@@ -54,6 +51,9 @@ app.use(session({
   saveUninitialized: true
 }));
 
+// Configure passport middleware
+require('./config/passport-setup')(passport);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -63,7 +63,7 @@ app.use('/', indexRoutes);
 const authRoutes = require('./routes/auth-routes');
 app.use('/', authRoutes);
 
-//====================================================================ROUTES-END
+//====================================================================ERROR-PAGE
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
