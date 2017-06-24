@@ -11,6 +11,10 @@ const cors         = require('cors');
 const session      = require('express-session');
 const MongoStore   = require('connect-mongo')(session);
 
+
+
+const passport     = require('passport');
+
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI);
 
@@ -40,19 +44,24 @@ if (process.env.NODE_ENV === 'development') {
   }));
 }
 app.use(session({
-  secret: 'thiosbntgpiwbnovbtwo;bvwe',
-  cookie: { maxAge: 60000 * 24 }, //is this a day or 24 minutes?
+  secret: 'C^a7T9rtP%c7276oUU3D',
+  cookie: { maxAge: 60000 * 24 }, // thought: is this a day or 24 minutes?
   store: new MongoStore({
     mongooseConnection : mongoose.connection,
-    ttl: 24 * 60 * 60
+    ttl: 24 * 60 * 60 // que pinga es esto?
   }),
   resave: true,
   saveUninitialized: true
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 //========================================================================ROUTES
-const index = require('./routes/index');
-app.use('/', index);
+const indexRoutes = require('./routes/index-routes');
+app.use('/', indexRoutes);
+const authRoutes = require('./routes/auth-routes');
+app.use('/', authRoutes);
 
 //====================================================================ROUTES-END
 
