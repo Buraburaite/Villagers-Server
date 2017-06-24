@@ -109,3 +109,5 @@ authRoutes.post('/signup', (req, res, next) => {
     });
   });
 });
+
+module.exports = authRoutes;
