@@ -34,7 +34,7 @@ authRoutes.post('/login', (req, res, next) => {
       // If it got to this point, it worked, so respond with the user as json
       res.status(200).json(req.user); // passport already attached user to req
     });
-  }(req, res, next);
+  });
 });
 
 //======================================================================= LOGOUT
@@ -105,7 +105,6 @@ authRoutes.post('/signup', (req, res, next) => {
         // ...send a response containing the user object to the client, as json
         res.status(200).json(req.user);
       });
-      }
     });
   });
 });
