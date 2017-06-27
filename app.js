@@ -60,7 +60,7 @@ app.use(passport.session());
 //========================================================================ROUTES
 const indexRoutes = require('./routes/index-routes');
 app.use('/', indexRoutes);
-const authRoutes = require('./routes/auth-routes');
+const authRoutes = require('./routes/auth/auth-routes');
 app.use('/', authRoutes);
 
 //====================================================================ERROR-PAGE
