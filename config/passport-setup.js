@@ -2,10 +2,10 @@ const User          = require('../models/user-model');
 const bcrypt        = require('bcrypt');
 const LocalStrategy = require('passport-local').Strategy;
 
-module.exports = function (passport) {
+module.exports = function (passportModule) {
 
   // Add the user's id into our session
-  passport.serializeUser((userToLogIn, done) => {
+  passportModule.serializeUser((userToLogIn, done) => {
 
     /* Space for additional stuff, if we want */
 
@@ -13,7 +13,7 @@ module.exports = function (passport) {
   });
 
   // Grab the user's object from the database
-  passport.deserializeUser((userIdFromSession, done) => {
+  passportModule.deserializeUser((userIdFromSession, done) => {
 
     User.findById(userIdFromSession, (err, userDocument) => {
       if (err) {
@@ -27,7 +27,7 @@ module.exports = function (passport) {
     });
   });
 
-  passport.use(new LocalStrategy((username, password, next) => {
+  passportModule.use(new LocalStrategy((username, password, next) => {
     // Find the user in our database...
     User.findOne({ username }, (err, foundUser) => {
       if (err) {
@@ -37,12 +37,12 @@ module.exports = function (passport) {
 
       // ...if no user of that name exists, pass an error...
       if (!foundUser) {
-        next(null, false, { message: 'Incorrect username' }); // As far as I can tell, next should only take one param (the error);
+        next(null, false, { message: 'Incorrect username' }); //NOTE As far as I can tell, next should only take one param (the error). But this has worked before.
         return;
       }
 
       // ...if their password doesn't match, pass an error...
-      if (!bcrypt.compareSync(password, foundUser.password)) { // can we make this asynchronous? leave error checking in cb
+      if (!bcrypt.compareSync(password, foundUser.password)) { //NOTE can we make this asynchronous? leave error checking in cb
         next(null, false, { message: 'Incorrect password' });
         return;
       }
@@ -54,7 +54,7 @@ module.exports = function (passport) {
 
 
   // Example code for social login, implementing later on
-  // passport.use(new FBStrategy({
+  // passportModule.use(new FBStrategy({
   //   clientID: process.env.FB_CLIENT_ID,
   //   clientSecret: process.env.FB_CLIENT_SECRET,
   //   callbackURL: process.env.HOST_ADDRESS + '/auth/facebook/callback',
@@ -63,7 +63,7 @@ module.exports = function (passport) {
   // }
   // ));
   //
-  // passport.use(new GoogleStrategy({
+  // passportModule.use(new GoogleStrategy({
   //   clientID: process.env.GOOGLE_CLIENT_ID,
   //   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
   //   callbackURL: process.env.HOST_ADDRESS + '/auth/google/callback',

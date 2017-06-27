@@ -51,9 +51,8 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// Configure passport middleware
+// Configure and initialize passport middleware
 require('./config/passport-setup')(passport);
-
 app.use(passport.initialize());
 app.use(passport.session());
 

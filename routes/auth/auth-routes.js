@@ -2,16 +2,19 @@ const Router     = require('express').Router;
 const passport   = require('passport');
 const bcrypt     = require('bcrypt');
 
-const User       = require('../models/user-model');
+const User = require('../../models/user-model');
+const populateUser = require('./auth-functions');
 
 const authRoutes = Router();
 
 //======================================================================== LOGIN
 // Route for securely logging in a user
 authRoutes.post('/login', (req, res, next) => {
+  console.log('here4');
 
   // Passport's local strategy makes it pretty simple
   passport.authenticate('local', (err, theUser, failureDetails) => {
+    console.log('here5');
     // Was there an error with the authentication function?
     if (err) {
       res.status(500).json({ message: 'Something went wrong' });
@@ -31,7 +34,9 @@ authRoutes.post('/login', (req, res, next) => {
         return;
       }
 
-      // If it got to this point, it worked, so respond with the user as json
+      // If it got to this point, it worked, so populate the user object...
+      populateUser(theUser);
+      // ...and send it in the response...
       res.status(200).json(req.user); // passport already attached user to req
     });
   });

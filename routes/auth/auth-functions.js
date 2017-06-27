@@ -1,12 +1,13 @@
-import User from '../../models/user-model';
+const User = require('../../models/user-model');
 
 // Take a user document, and populates many of the fields.
 // Appropriate for home page, though clearly won't scale to
 // thousands of messages.
 const populateUser = (userDoc) => {
   User.populate(
-    // With the user's document...
+    // Take the user's document...
     userDoc,
+    // ...populate using these options...
     {
       // ...populate their students, except for their password...
       path: 'students', select: '-password', populate: {
@@ -20,18 +21,15 @@ const populateUser = (userDoc) => {
         }
       }
     },
-    (err2) => {
-      if (err2) {
-        res.status(500).json({
-          message : 'Something went wrong2'
-        });
+    // ...finally, execute this callback
+    (err, populatedDoc) => {
+      if (err) {
+        throw new Error('Failed to populate user document');
       }
-      res.status(200).json(userDoc);
-    });
-}
+    }
+  );
+};
 
-
-
-export default {
+module.exports = {
   populateUser
 };
