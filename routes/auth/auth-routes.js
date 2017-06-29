@@ -3,43 +3,42 @@ const passport   = require('passport');
 const bcrypt     = require('bcrypt');
 
 const User = require('../../models/user-model');
-const populateUser = require('./auth-functions');
+const populateUser = require('./auth-functions').populateUser;
 
 const authRoutes = Router();
 
 //======================================================================== LOGIN
 // Route for securely logging in a user
 authRoutes.post('/login', (req, res, next) => {
-  console.log('here4');
 
   // Passport's local strategy makes it pretty simple
   passport.authenticate('local', (err, theUser, failureDetails) => {
-    console.log('here5');
     // Was there an error with the authentication function?
     if (err) {
-      res.status(500).json({ message: 'Something went wrong' });
+      res.status(500).json({ message: 'Something went wrong1' });
       return;
     }
 
-    // If not, then a user object should have been found
+    // If !theUser, then the authentication failed, according to passport docs
     if (!theUser) {
       res.status(401).json(failureDetails);
       return;
     }
 
-    // If one was found, then log the user
+    // If it got to this point, the user was found, so populate its fields...
+    populateUser(theUser);
+
+    // ...and log them into the session...
     req.login(theUser, (err) => { // passport attaches this function to req
       if (err) {
-        res.status(500).json({ message: 'Something went wrong' });
+        res.status(500).json({ message: 'Something went wrong2' });
         return;
       }
 
-      // If it got to this point, it worked, so populate the user object...
-      populateUser(theUser);
-      // ...and send it in the response...
+      // ...passing the user object in the request.
       res.status(200).json(req.user); // passport already attached user to req
     });
-  });
+  })(req, res, next); // Have to pass these, yes it's weird
 });
 
 //======================================================================= LOGOUT
@@ -99,6 +98,7 @@ authRoutes.post('/signup', (req, res, next) => {
         res.status(400).json({ message: 'Something went wrong' });
         return;
       }
+      console.log('here6');
 
       // Also, we log the user into the session...
       req.login(theUser, (err) => { // passport attaches this method to req
@@ -107,6 +107,7 @@ authRoutes.post('/signup', (req, res, next) => {
           return;
         }
 
+        console.log('here7');
         // ...send a response containing the user object to the client, as json
         res.status(200).json(req.user);
       });

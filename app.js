@@ -22,7 +22,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 // default value for title local
-app.locals.title = 'Express - Generated with IronGenerator';
+app.locals.title = 'Villagers Server';
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -41,7 +41,7 @@ if (process.env.NODE_ENV === 'development') {
   }));
 }
 app.use(session({
-  secret: 'C^a7T9rtP%c7276oUU3D',
+  secret: process.env.SESSION_SECRET,
   cookie: { maxAge: 60000 * 24 }, // thought: is this a day or 24 minutes?
   store: new MongoStore({
     mongooseConnection : mongoose.connection,
@@ -51,10 +51,10 @@ app.use(session({
   saveUninitialized: true
 }));
 
-// Configure and initialize passport middleware
-require('./config/passport-setup')(passport);
 app.use(passport.initialize());
 app.use(passport.session());
+// Configure and initialize passport middleware
+require('./config/passport-setup')(passport);
 
 //========================================================================ROUTES
 const indexRoutes = require('./routes/index-routes');

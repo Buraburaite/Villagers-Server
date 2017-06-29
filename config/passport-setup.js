@@ -5,25 +5,25 @@ const LocalStrategy = require('passport-local').Strategy;
 module.exports = function (passportModule) {
 
   // Add the user's id into our session
-  passportModule.serializeUser((userToLogIn, done) => {
+  passportModule.serializeUser((userToLogIn, next) => {
 
     /* Space for additional stuff, if we want */
 
-    done(null, userToLogIn._id); // callback required by passport
+    next(null, userToLogIn._id); // callback required by passport
   });
 
   // Grab the user's object from the database
-  passportModule.deserializeUser((userIdFromSession, done) => {
+  passportModule.deserializeUser((userIdFromSession, next) => {
 
     User.findById(userIdFromSession, (err, userDocument) => {
       if (err) {
-        done(err);
+        next(err);
         return;
       }
 
       /* Space for additional stuff, if we want */
 
-      done(null, userDocument); // callback required by passport
+      next(null, userDocument); // callback required by passport
     });
   });
 
@@ -41,11 +41,12 @@ module.exports = function (passportModule) {
         return;
       }
 
+      //TODO: Uncomment this once we're ready to tackle signup and the database issues
       // ...if their password doesn't match, pass an error...
-      if (!bcrypt.compareSync(password, foundUser.password)) { //NOTE can we make this asynchronous? leave error checking in cb
-        next(null, false, { message: 'Incorrect password' });
-        return;
-      }
+      // if (!bcrypt.compareSync(password, foundUser.password)) { //NOTE can we make this asynchronous? leave error checking in cb
+      //   next(null, false, { message: 'Incorrect password' });
+      //   return;
+      // }
 
       // ... otherwise, pass the user object...
       next(null, foundUser);
