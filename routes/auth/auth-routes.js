@@ -26,18 +26,23 @@ authRoutes.post('/login', (req, res, next) => {
     }
 
     // If it got to this point, the user was found, so populate its fields...
-    populateUser(theUser);
+    populateUser(theUser)
+    .then((populatedUser) => {
+      // ...and log them into the session...
+      req.login(populatedUser, (err) => { // passport attaches this function to req
+        if (err) {
+          res.status(500).json({ message: 'Something went wrong2' });
+          return;
+        }
 
-    // ...and log them into the session...
-    req.login(theUser, (err) => { // passport attaches this function to req
-      if (err) {
-        res.status(500).json({ message: 'Something went wrong2' });
-        return;
-      }
-
-      // ...passing the user object in the request.
-      res.status(200).json(req.user); // passport already attached user to req
+        // ...passing the user object in the request.
+        res.status(200).json(req.user); // passport already attached user to req
+      });
+    })
+    .catch((err) => {
+      res.status(500).json({ message: 'Something went wrong3' });
     });
+
   })(req, res, next); // Have to pass these, yes it's weird
 });
 
