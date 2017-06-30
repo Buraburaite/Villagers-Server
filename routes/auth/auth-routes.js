@@ -71,15 +71,12 @@ authRoutes.get('/loggedin', (req, res, next) => {
 authRoutes.post('/signup', (req, res, next) => {
 
   // Get their proposed credentials
-  const username = req.body.username;
-  const password = req.body.password;
-  const fullname = req.body.fullname;
-  const kindOfUser = req.body.kindOfUser;
-  const profPic = req.body.profPic;
+  const username   = req.body.username;
+  const password   = req.body.password;
 
   // Both username and password must be present
-  if (!username || !password || ! fullname || !kindOfUser || !profPic) {
-    res.status(400).json({ message: 'Must provide all required fields' });
+  if (!username || !password) {
+    res.status(400).json({ message: 'Username and password must be provided' });
     return;
   }
 
@@ -98,14 +95,7 @@ authRoutes.post('/signup', (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt);
 
     // ...then, create a new user document to save in our database...
-    // const theUser = new User({ username, password: hashPass });
-    const theUser = new User({
-      username,
-      password,
-      fullname,
-      kind : kindOfUser,
-      profilePic
-     });
+    const theUser = new User({ username, password: hashPass });
 
     // ...finally, try to save it in our database
     theUser.save((err) => {
@@ -113,7 +103,6 @@ authRoutes.post('/signup', (req, res, next) => {
         res.status(400).json({ message: 'Something went wrong' });
         return;
       }
-      console.log('here6');
 
       // Also, we log the user into the session...
       req.login(theUser, (err) => { // passport attaches this method to req
@@ -122,7 +111,6 @@ authRoutes.post('/signup', (req, res, next) => {
           return;
         }
 
-        console.log('here7');
         // ...send a response containing the user object to the client, as json
         res.status(200).json(req.user);
       });
