@@ -3,7 +3,7 @@ const passport   = require('passport');
 const bcrypt     = require('bcrypt');
 
 const User = require('../../models/user-model');
-const populateUser = require('./auth-functions').populateUser;
+const populateUser = require('./auth-extra-functions').populateUser;
 
 const authRoutes = Router();
 
@@ -73,10 +73,13 @@ authRoutes.post('/signup', (req, res, next) => {
   // Get their proposed credentials
   const username = req.body.username;
   const password = req.body.password;
+  const fullname = req.body.fullname;
+  const kindOfUser = req.body.kindOfUser;
+  const profPic = req.body.profPic;
 
   // Both username and password must be present
-  if (!username || !password) {
-    res.status(400).json({ message: 'Must provide username and password' });
+  if (!username || !password || ! fullname || !kindOfUser || !profPic) {
+    res.status(400).json({ message: 'Must provide all required fields' });
     return;
   }
 
@@ -95,7 +98,14 @@ authRoutes.post('/signup', (req, res, next) => {
     const hashPass = bcrypt.hashSync(password, salt);
 
     // ...then, create a new user document to save in our database...
-    const theUser = new User({ username, password: hashPass });
+    // const theUser = new User({ username, password: hashPass });
+    const theUser = new User({
+      username,
+      password,
+      fullname,
+      kind : kindOfUser,
+      profilePic
+     });
 
     // ...finally, try to save it in our database
     theUser.save((err) => {
