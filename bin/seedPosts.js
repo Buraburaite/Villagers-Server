@@ -1,6 +1,6 @@
 const Post = require('../models/post-model.js');
 
-function addPosts(users) {
+function addPosts(vils) {
 
   const {
     msBlueberry,
@@ -12,7 +12,7 @@ function addPosts(users) {
     brendan,
     raphael,
     benjamin
-  } = users;
+  } = vils;
 
   const blueberryPosts = [{
     //Post 1

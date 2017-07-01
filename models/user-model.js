@@ -10,47 +10,6 @@ const userSchema = new Schema({
   password : {
     type : String,
     required : [true, 'A password was not provided']
-  },
-  kind : {
-    type : String,
-    enum : ['Parent', 'Teacher', 'Student'],
-    required : [true, 'The kind of user must be specificied ("Parent", "Teacher", or "Student")']
-  },
-  firstname : {
-    type : String
-  },
-  lastname : {
-    type : String
-  },
-  fullname : {
-    type : String,
-    required : [true, 'A full name was not provided']
-  },
-  schoolname : {
-    type : String
-  },
-  subject : {
-    type : String
-  },
-  profilePic : {
-    type : String,
-    required : [true, 'A profile picture was not provided']
-  },
-  students : {
-    type : [ObjectId],
-    ref : 'User'
-  },
-  parents : {
-    type : [ObjectId],
-    ref : 'User'
-  },
-  teachers : {
-    type : [ObjectId],
-    ref : 'User'
-  },
-  posts : {
-    type : [ObjectId],
-    ref : 'Post'
   }
 },{
   timestamps : true

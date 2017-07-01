@@ -5,7 +5,7 @@ const ObjectId = Schema.Types.ObjectId;
 const commentSchema = new Schema({
   author : {
     type : ObjectId,
-    ref : 'User'
+    ref : 'Villager'
   },
   content : {
     type : String,
@@ -18,11 +18,11 @@ const commentSchema = new Schema({
 const postSchema = new Schema({
   author : {
     type : ObjectId,
-    ref : 'User'
+    ref : 'Villager'
   },
   subscribers : {
     type : [ObjectId],
-    ref : 'User'
+    ref : 'Villager'
   },
   content : {
     type : String,

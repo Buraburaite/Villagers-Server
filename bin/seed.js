@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const dotenv   = require('dotenv');
 
 const User      = require('../models/user-model.js');
+const Villager  = require('../models/villager-model.js');
 const Post      = require('../models/post-model.js');
 
 const addPosts  = require('./seedPosts.js');
@@ -9,104 +10,7 @@ const addPosts  = require('./seedPosts.js');
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI);
 
-users = [{
-  username : 'parent1',
-  password : 'super',
-  kind : 'Parent',
-  firstname : 'Timon',
-  lastname : 'Gomez',
-  fullname : 'Timon Gomez',
-  profilePic : 'assets/timon.jpg',
-  students : []
-},{
-  username : 'parent2',
-  password : 'super',
-  kind : 'Parent',
-  firstname : 'Pamela',
-  lastname : 'Dunn',
-  fullname : 'Pamela Anne Dunn',
-  profilePic : 'assets/pamela.jpg',
-  students : []
-},{
-  username : 'parent3',
-  password : 'super',
-  kind : 'Parent',
-  firstname : 'Dana',
-  lastname : 'Holmes',
-  fullname : 'Dana Holmes',
-  profilePic : 'assets/dana.jpg',
-  students : []
-},{
-  username : 'student1',
-  password : 'super',
-  kind : 'Student',
-  firstname : 'Sally',
-  lastname : 'Gomez',
-  fullname : 'Sally Gomez',
-  profilePic : 'assets/sally.jpg',
-  schoolname : 'Dade Middle School',
-  parents : [],
-  teachers : []
-},{
-  username : 'student2',
-  password : 'super',
-  kind : 'Student',
-  firstname : 'Raphael',
-  lastname : 'Gomez',
-  fullname : 'Raphael Gomez',
-  profilePic : 'assets/raphael.jpg',
-  schoolname : 'Dade High School',
-  parents : [],
-  teachers : []
-},{
-  username : 'student3',
-  password : 'super',
-  kind : 'Student',
-  firstname : 'Benjamin',
-  lastname : 'Dunn',
-  fullname : 'Benjamin Dunn',
-  profilePic : 'assets/benjamin.jpg',
-  schoolname : 'Dade High School',
-  parents : [],
-  teachers : []
-},{
-  username : 'student4',
-  password : 'super',
-  kind : 'Student',
-  firstname : 'Brendan',
-  lastname : 'Holmes',
-  fullname : 'Brendan Holmes',
-  profilePic : 'assets/brendan.jpg',
-  schoolname : 'Dade Middle School',
-  parents : [],
-  teachers : []
-},{
-  username : 'teacher1',
-  password : 'super',
-  kind : 'Teacher',
-  firstname : 'Samantha',
-  lastname : 'Blueberry',
-  fullname : 'Ms. Blueberry',
-  profilePic : 'assets/blueberry.jpg',
-  schoolname : 'Dade Middle School',
-  subject : 'Math',
-  students : [],
-  posts : []
-},{
-  username : 'teacher2',
-  password : 'super',
-  kind : 'Teacher',
-  firstname : 'Terrance',
-  lastname : 'Pistachie',
-  fullname : 'The Pistachio',
-  profilePic : 'assets/pistachio.jpg',
-  schoolname : 'Dade High School',
-  subject : 'History',
-  students : [],
-  posts : []
-}];
-
-User.create(users, (err, userDocs) => {
+Villager.create(villagers, (err, vilDocs) => {
   if (err) {
     console.log("User create error");
     throw err;
@@ -117,24 +21,24 @@ User.create(users, (err, userDocs) => {
     return userArray.find((user) => user.username === targetUsername);
   }
 
-  const users = {};
-  users.timon        = findByUsername(userDocs, 'parent1');
-  users.pamela       = findByUsername(userDocs, 'parent2');
-  users.dana         = findByUsername(userDocs, 'parent3');
-  users.sally        = findByUsername(userDocs, 'student1');
-  users.raphael      = findByUsername(userDocs, 'student2');
-  users.benjamin     = findByUsername(userDocs, 'student3');
-  users.brendan      = findByUsername(userDocs, 'student4');
-  users.msBlueberry  = findByUsername(userDocs, 'teacher1');
-  users.thePistachio = findByUsername(userDocs, 'teacher2');
+  const vils = {};
+  vils.timon        = findByUsername(vilDocs, 'parent1');
+  vils.pamela       = findByUsername(vilDocs, 'parent2');
+  vils.dana         = findByUsername(vilDocs, 'parent3');
+  vils.sally        = findByUsername(vilDocs, 'student1');
+  vils.raphael      = findByUsername(vilDocs, 'student2');
+  vils.benjamin     = findByUsername(vilDocs, 'student3');
+  vils.brendan      = findByUsername(vilDocs, 'student4');
+  vils.msBlueberry  = findByUsername(vilDocs, 'teacher1');
+  vils.thePistachio = findByUsername(vilDocs, 'teacher2');
 
   //Seed post and comment history
-  addPosts(users);
+  addPosts(vils);
 
-  setTimeout(() => makeConnections(users, userDocs), 2000);
+  setTimeout(() => makeConnections(vils, vilDocs), 2000);
 });
 
-function makeConnections(users, userDocs) {
+function makeConnections(vils, vilDocs) {
 
   const {
     msBlueberry,
@@ -146,7 +50,7 @@ function makeConnections(users, userDocs) {
     brendan,
     raphael,
     benjamin
-  } = users;
+  } = vils;
 
   //Give parents their students
   timon. students.push(sally._id, raphael._id);
@@ -170,7 +74,7 @@ function makeConnections(users, userDocs) {
   thePistachio.students.push(raphael._id, benjamin._id);
 
   //Save the new connections
-  userDocs.forEach((doc) => {
+  vilDocs.forEach((doc) => {
     doc.save((err) => {
       if (err) {
         console.log("User save connections error");
