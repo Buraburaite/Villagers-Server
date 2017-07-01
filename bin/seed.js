@@ -1,14 +1,18 @@
 const mongoose = require('mongoose');
+const bcrypt   = require('bcrypt');
 const dotenv   = require('dotenv');
 
-const User      = require('../models/user-model.js');
+const User      = require('../models/vil-model.js');
 const Villager  = require('../models/villager-model.js');
 const Post      = require('../models/post-model.js');
 
+const getHash   = require('./misc.js').getHash;
 const addPosts  = require('./seedPosts.js');
 
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI);
+
+User.save(new User({ username: 'test', password: getHash('test')}))
 
 Villager.create(villagers, (err, vilDocs) => {
   if (err) {
@@ -16,9 +20,9 @@ Villager.create(villagers, (err, vilDocs) => {
     throw err;
   }
 
-  //Find a particular user out of an array of user documents
-  function findByUsername(userArray, targetUsername) {
-    return userArray.find((user) => user.username === targetUsername);
+  //Find a particular vil out of an array of vil documents
+  function findByUsername(vilArray, targetUsername) {
+    return vilArray.find((vil) => vil.username === targetUsername);
   }
 
   const vils = {};
@@ -77,7 +81,7 @@ function makeConnections(vils, vilDocs) {
   vilDocs.forEach((doc) => {
     doc.save((err) => {
       if (err) {
-        console.log("User save connections error");
+        console.log("Villager save connections error");
         throw err;
       }
     });

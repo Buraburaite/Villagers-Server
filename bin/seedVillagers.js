@@ -1,4 +1,5 @@
 const Post = require('../models/post-model.js');
+const getHash   = require('./misc.js').getHash;
 
 function addVillagers(villagers) {
 
@@ -15,100 +16,91 @@ function addVillagers(villagers) {
   } = villagers;
 
   villagers = [{
-    username : 'parent1',
-    password : 'super',
-    kind : 'Parent',
-    firstname : 'Timon',
-    lastname : 'Gomez',
-    fullname : 'Timon Gomez',
-    profilePic : 'assets/timon.jpg',
-    students : []
+    username: 'parent1',
+    password: getHash('super'),
+    firstname: 'Timon',
+    lastname: 'Gomez',
+    fullname: 'Timon Gomez',
+    profilePic: 'assets/timon.jpg',
+    students: []
   },{
-    username : 'parent2',
-    password : 'super',
-    kind : 'Parent',
-    firstname : 'Pamela',
-    lastname : 'Dunn',
-    fullname : 'Pamela Anne Dunn',
-    profilePic : 'assets/pamela.jpg',
-    students : []
+    username: 'parent2',
+    password: getHash('super'),
+    firstname: 'Pamela',
+    lastname: 'Dunn',
+    fullname: 'Pamela Anne Dunn',
+    profilePic: 'assets/pamela.jpg',
+    students: []
   },{
-    username : 'parent3',
-    password : 'super',
-    kind : 'Parent',
-    firstname : 'Dana',
-    lastname : 'Holmes',
-    fullname : 'Dana Holmes',
-    profilePic : 'assets/dana.jpg',
-    students : []
+    username: 'parent3',
+    password: getHash('super'),
+    firstname: 'Dana',
+    lastname: 'Holmes',
+    fullname: 'Dana Holmes',
+    profilePic: 'assets/dana.jpg',
+    students: []
   },{
-    username : 'student1',
-    password : 'super',
-    kind : 'Student',
-    firstname : 'Sally',
-    lastname : 'Gomez',
-    fullname : 'Sally Gomez',
-    profilePic : 'assets/sally.jpg',
-    schoolname : 'Dade Middle School',
-    parents : [],
-    teachers : []
+    username: 'student1',
+    password: getHash('super'),
+    firstname: 'Sally',
+    lastname: 'Gomez',
+    fullname: 'Sally Gomez',
+    profilePic: 'assets/sally.jpg',
+    schoolname: 'Dade Middle School',
+    parents: [],
+    teachers: []
   },{
-    username : 'student2',
-    password : 'super',
-    kind : 'Student',
-    firstname : 'Raphael',
-    lastname : 'Gomez',
-    fullname : 'Raphael Gomez',
-    profilePic : 'assets/raphael.jpg',
-    schoolname : 'Dade High School',
-    parents : [],
-    teachers : []
+    username: 'student2',
+    password: getHash('super'),
+    firstname: 'Raphael',
+    lastname: 'Gomez',
+    fullname: 'Raphael Gomez',
+    profilePic: 'assets/raphael.jpg',
+    schoolname: 'Dade High School',
+    parents: [],
+    teachers: []
   },{
-    username : 'student3',
-    password : 'super',
-    kind : 'Student',
-    firstname : 'Benjamin',
-    lastname : 'Dunn',
-    fullname : 'Benjamin Dunn',
-    profilePic : 'assets/benjamin.jpg',
-    schoolname : 'Dade High School',
-    parents : [],
-    teachers : []
+    username: 'student3',
+    password: getHash('super'),
+    firstname: 'Benjamin',
+    lastname: 'Dunn',
+    fullname: 'Benjamin Dunn',
+    profilePic: 'assets/benjamin.jpg',
+    schoolname: 'Dade High School',
+    parents: [],
+    teachers: []
   },{
-    username : 'student4',
-    password : 'super',
-    kind : 'Student',
-    firstname : 'Brendan',
-    lastname : 'Holmes',
-    fullname : 'Brendan Holmes',
-    profilePic : 'assets/brendan.jpg',
-    schoolname : 'Dade Middle School',
-    parents : [],
-    teachers : []
+    username: 'student4',
+    password: getHash('super'),
+    firstname: 'Brendan',
+    lastname: 'Holmes',
+    fullname: 'Brendan Holmes',
+    profilePic: 'assets/brendan.jpg',
+    schoolname: 'Dade Middle School',
+    parents: [],
+    teachers: []
   },{
-    username : 'teacher1',
-    password : 'super',
-    kind : 'Teacher',
-    firstname : 'Samantha',
-    lastname : 'Blueberry',
-    fullname : 'Ms. Blueberry',
-    profilePic : 'assets/blueberry.jpg',
-    schoolname : 'Dade Middle School',
-    subject : 'Math',
-    students : [],
-    posts : []
+    username: 'teacher1',
+    password: getHash('super'),
+    firstname: 'Samantha',
+    lastname: 'Blueberry',
+    fullname: 'Ms. Blueberry',
+    profilePic: 'assets/blueberry.jpg',
+    schoolname: 'Dade Middle School',
+    subject: 'Math',
+    students: [],
+    posts: []
   },{
-    username : 'teacher2',
-    password : 'super',
-    kind : 'Teacher',
-    firstname : 'Terrance',
-    lastname : 'Pistachie',
-    fullname : 'The Pistachio',
-    profilePic : 'assets/pistachio.jpg',
-    schoolname : 'Dade High School',
-    subject : 'History',
-    students : [],
-    posts : []
+    username: 'teacher2',
+    password: getHash('super'),
+    firstname: 'Terrance',
+    lastname: 'Pistachie',
+    fullname: 'The Pistachio',
+    profilePic: 'assets/pistachio.jpg',
+    schoolname: 'Dade High School',
+    subject: 'History',
+    students: [],
+    posts: []
   }];
 
   Villager.create(pistachioPosts, (err, vil) => {
