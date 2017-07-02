@@ -3,7 +3,7 @@ const Schema   = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const villagerSchema = new Schema({
-  username: {
+  vilname: {
     type: String
   },
   password: {

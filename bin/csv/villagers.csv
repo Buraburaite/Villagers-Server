@@ -1,4 +1,4 @@
-Vilname,Password,Kind,Full Name,First Name,Last Name,School,Subject,Profile Picture,Parents,Students,Teachers,Blurb
+vilname,password,kind,fullname,firstname,lastname,school,subject,profilePic,parents,students,teachers,blurb
 timonGomez,super,parent,Timon Gomez,Timon,Gomez,,,timon.png,,"sallyGomez, raphaelGomez",,
 pamelaDunn,super,parent,Pamela Anne Dunn,Pamela,Dunn,,,pamela.png,,benjaminDunn,,
 danaHolmes,super,parent,Dana Holmes,Dana,Holmes,,,dana.png,,brendanHolmes,,
