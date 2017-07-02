@@ -26,7 +26,10 @@ mongoose.connect(process.env.MONGODB_URI, (err) => {
     console.log('db has been dropped');
 
     createSeed()
-    .catch(() => {
+    .catch((err) => {
+
+      console.log("Seed Error: ", err);
+
       mongoose.connection.close((err3) => {
         if (err3) {
           return err3;

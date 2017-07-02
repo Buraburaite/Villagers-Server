@@ -1,3 +1,6 @@
+const fs = require('fs');
+const parser = require('papaparse');
+
 const User      = require('../models/user-model.js');
 const Villager  = require('../models/villager-model.js');
 const Post      = require('../models/post-model.js');
@@ -28,6 +31,8 @@ const starStringToList = (starString) => {
 
 const createVillagers = (userDoc) => {
 
+  console.log('user has been created');
+
   const vilDocs = readCSV(__dirname + '/csv/villagers.csv');
 
   vilDocs.forEach((vil) => {
@@ -43,7 +48,12 @@ const createVillagers = (userDoc) => {
   return Villager.create(vilDocs);
 };
 
-const addVillagersToUser = (vilDocs) => {};
+const addVillagersToUser = (vilDocs) => {
+
+  console.log('villagers have been created');
+
+};
+
 const createPosts = () => {};
 const addPostsToVillagers = (postDocs) => {};
 
