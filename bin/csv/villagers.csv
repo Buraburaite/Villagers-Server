@@ -1,0 +1,10 @@
+Vilname,Password,Kind,Full Name,First Name,Last Name,School,Subject,Profile Picture,Parents,Students,Teachers,Blurb
+timonGomez,super,parent,Timon Gomez,Timon,Gomez,,,timon.png,,"sallyGomez, raphaelGomez",,
+pamelaDunn,super,parent,Pamela Anne Dunn,Pamela,Dunn,,,pamela.png,,benjaminDunn,,
+danaHolmes,super,parent,Dana Holmes,Dana,Holmes,,,dana.png,,brendanHolmes,,
+sallyGomez,super,student,Sally Gomez,Sally,Gomez,Dade Middle School,,sally.png,timonGomez,,blueberry,
+raphaelGomez,super,student,Raphael Gomez,Raphael,Gomez,Dade High School,,raphael.png,timonGomez,,pistachio,
+benjaminDunn,super,student,Benjamin Dunn,Benjamin,Dunn,Dade High School,,benjamin.png,pamelaDunn,,pistachio,
+brendanHolmes,super,student,Brendan Holmes,Brendan,Holmes,Dade Middle School,,brendan.png,danaHolmes,,blueberry,
+blueberry,super,teacher,Ms. Blueberry,Samantha,Blueberry,Dade Middle School,Math,blueberry.png,,sallyGomez*brendanHolmes,,
+pistachio,super,teacher,The Pistachio,Terrance,Pistachie,Dade High School,History,pistachio.png,,raphaelGomez*benjaminDunn,,

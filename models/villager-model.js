@@ -4,22 +4,23 @@ const ObjectId = Schema.Types.ObjectId;
 
 const villagerSchema = new Schema({
   username: {
-    type: String,
-    required: [true, 'A username was not provided']
+    type: String
   },
   password: {
+    type: String
+  },
+  kind: {
     type: String,
-    required: [true, 'A password was not provided']
+    enum: ['parent', 'student', 'teacher']
+  },
+  fullname: {
+    type: String
   },
   firstname: {
     type: String
   },
   lastname: {
     type: String
-  },
-  fullname: {
-    type: String,
-    required: [true, 'A full name was not provided']
   },
   school: {
     type: String
@@ -28,8 +29,7 @@ const villagerSchema = new Schema({
     type: String
   },
   profilePic: {
-    type: String,
-    required: [true, 'A profile picture was not provided']
+    type: String
   },
   students: {
     type: [villagerSchema],
@@ -43,6 +43,9 @@ const villagerSchema = new Schema({
   posts: {
     type: [ObjectId],
     ref: 'Post'
+  },
+  user: {
+    type: String
   }
 },{
   timestamps: true

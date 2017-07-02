@@ -66,7 +66,7 @@ function addPosts(vils) {
     },{
       author: pamela._id,
       content: `Does anyone know if Bright Futures applies to Dade State (go Badgers!)? I can't find out on their website,
-      wish it was as good as Villager!`
+      wish it was as good as Villagers!`
     },{
       author: timon._id,
       content: `Hi Pamela, yes it does, DSU's own financial aid site at www.dsu.edu/financial-aid#requirements has instructions
