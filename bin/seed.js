@@ -13,11 +13,11 @@ mongoose.connect(process.env.MONGODB_URI);
 // Account credentials for a test user
 const userCred = { username: 'test', password: getHash('test')};
 
-// Create the test user
-User.save(new User(testUser));
+// Generate default villagers
+userCred.villagers = seedVillagers(userCred.username);
 
-// Generate default villagers for
-seedVillagers(testUser.username);
+// Save the test user to the database
+User.save(new User(userCred));
 
 ====*/
 

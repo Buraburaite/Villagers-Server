@@ -3,16 +3,20 @@ const Schema   = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const userSchema = new Schema({
-  username : {
-    type : String,
-    required : [true, 'A username was not provided']
+  username: {
+    type: String,
+    required: [true, 'A username was not provided']
   },
-  password : {
-    type : String,
-    required : [true, 'A password was not provided']
+  password: {
+    type: String,
+    required: [true, 'A password was not provided']
+  },
+  villagers: {
+    type: [ObjectId],
+    ref: 'Villager'
   }
 },{
-  timestamps : true
+  timestamps: true
 });
 
 const User = mongoose.model('User', userSchema);

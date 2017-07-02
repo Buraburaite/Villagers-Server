@@ -32,13 +32,13 @@ const villagerSchema = new Schema({
     type: String
   },
   students: {
-    type: [villagerSchema],
+    type: [String],
   },
   parents: {
-    type: [villagerSchema]
+    type: [String]
   },
   teachers: {
-    type: [villagerSchema]
+    type: [String]
   },
   posts: {
     type: [ObjectId],

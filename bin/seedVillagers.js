@@ -1,6 +1,37 @@
 const fs = require('fs');
 const parser = require('papaparse');
 
+// Create villagers for the user
+const seedVillagers = (username) => {
+
+  // Get data out of our .csv files
+  const villagers = readCSV(__dirname + '/csv/villagers.csv');
+  const posts     = readCSV(__dirname + '/csv/posts.csv');
+  const comments  = readCSV(__dirname + '/csv/comments.csv');
+
+  // Create a dictionary of villagers
+  const vilDict = villagers.
+  reduce(
+    (dict, vil) => {
+      dict[vil.vilname] = vil;
+      return dict;
+    },
+    {}
+  );
+
+  villagers.forEach((vil) => {
+    // Add their user field
+    vil.user = username;
+
+    // Convert their list fields into actual lists
+    vil.parents  = starStringToList(vil.parents);
+    vil.students = starStringToList(vil.students);
+    vil.teachers = starStringToList(vil.teachers);
+  })
+
+  console.log(villagers);
+
+};
 // Convert a .csv file into a list of villager documents
 const readCSV = (filepath) => {
   // Get the filestring
@@ -24,33 +55,13 @@ const starStringToList = (starString) => {
   .filter((str) => str !== '');
 }
 
-// Turns a vilname into the corresponding villager obj
-const populateVillager = (vilname) => {
-
-}
-
-const seedVillagers = (username) => {
-
-  const data = readCSV(__dirname + '/csv/villagers.csv')
-
-  const vilDict = data.
-  reduce(
-    (dict, vil, index) => {
-      dict[vil.vilname] = vil;
-      return dict;
-    },
-    {}
-  );
-
-  data.forEach((vil) => {
-    // convert their list fields into actual lists
-    vil.parents  = starStringToList(vil.parents);
-    vil.students = starStringToList(vil.students);
-    vil.teachers = starStringToList(vil.teachers);
-  })
-
-  console.log(data);
-
-};
+seedVillagers('test');
 
 module.exports = seedVillagers;
+
+// Testing how circular stuff works
+// a = {};
+// b = { obj : a };
+// a.obj = b;
+//
+// console.log(a);
