@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
+const Mixed    = Schema.Types.Mixed;
 
 const commentSchema = new Schema({
   author: {
-    type: ObjectId,
+    type: Mixed,
     ref: 'Villager'
   },
   content: {
@@ -17,11 +18,11 @@ const commentSchema = new Schema({
 
 const postSchema = new Schema({
   author: {
-    type: ObjectId,
+    type: Mixed,
     ref: 'Villager'
   },
   subscribers: {
-    type: [ObjectId],
+    type: [Mixed],
     ref: 'Villager'
   },
   content: {

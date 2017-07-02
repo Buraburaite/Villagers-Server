@@ -49,8 +49,7 @@ const villagerSchema = new Schema({
     ref: 'Post'
   },
   user: {
-    type: ObjectId,
-    ref: 'User'
+    type: String
   }
 },{
   timestamps: true

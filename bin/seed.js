@@ -52,7 +52,11 @@ mongoose.connect(process.env.MONGODB_URI, (err) => {
 const createSeed = () => {
 
   // Account credentials for a test user
-  const testUser = new User({ username: 'test', password: getHash('test')});
+  const testUser = new User({
+    username: 'test',
+    password: getHash('test'),
+    villagers: []
+  });
 
   // Prepare a dictionary of vilname: _id pairs
   const vilDict = {};
