@@ -1,11 +1,22 @@
 const fs = require('fs');
 const parser = require('papaparse');
-const bcrypt = require('bcrypt');
 
-const getHash = require('./misc').getHash;
+// Convert a .csv file into a list of villager documents
+const readCSV = (filepath) => {
+  // Get the filestring
+  const fileString = fs.readFileSync(filepath).toString();
 
-// Convert 'thing1*thing2*thing3*' => ['thing1', 'thing2', 'thing3']
-// removes whitespaces and also removes any empties, e.g. thing1**thing2
+  // Pass it through PapaParser with our settings
+  const parsedFile = parser.parse(fileString, {
+    header: true,       // converts from json to an obj with header keys
+    dynamicTyping: true // auto-converts numbers and booleans from strings
+  });
+
+  return parsedFile.data;
+};
+
+// Convert 'thing1*thing2*thing3*' into ['thing1', 'thing2', 'thing3']
+// also removes whitespaces any empty strings, e.g. thing1**thing2
 const starStringToList = (starString) => {
   return starString
   .split('*')
@@ -18,15 +29,10 @@ const populateVillager = (vilname) => {
 
 }
 
-// Convert a .csv file into a list of villager documents
-const csvToVillagerDocs = (filepath) => {
-  const fileString = fs.readFileSync(filepath).toString();
-  const parsedFile = parser.parse(fileString, {
-    header: true,
-    dynamicTyping: true
-  });
+const seedVillagers = (username) => {
 
-  const data = parsedFile.data;
+  const data = readCSV(__dirname + '/csv/villagers.csv')
+
   const vilDict = data.
   reduce(
     (dict, vil, index) => {
@@ -44,8 +50,7 @@ const csvToVillagerDocs = (filepath) => {
   })
 
   console.log(data);
+
 };
 
-readCSV(__dirname + '/csv/villagers.csv');
-
-module.exports = { getHash };
+module.exports = seedVillagers;
