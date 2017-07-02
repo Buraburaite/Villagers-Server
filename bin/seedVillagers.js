@@ -1,27 +1,18 @@
 const fs = require('fs');
 const parser = require('papaparse');
 
+const Villager = require('../models/villager-model.js');
+
+//================================================================-SEEDVILLAGERS
 // Create villagers for the user
-const seedVillagers = (username) => {
+const seedVillagers = () => {
 
   // Get data out of our .csv files
   const villagers = readCSV(__dirname + '/csv/villagers.csv');
   const posts     = readCSV(__dirname + '/csv/posts.csv');
   const comments  = readCSV(__dirname + '/csv/comments.csv');
 
-  // Create a dictionary of villagers
-  const vilDict = villagers.
-  reduce(
-    (dict, vil) => {
-      dict[vil.vilname] = vil;
-      return dict;
-    },
-    {}
-  );
-
   villagers.forEach((vil) => {
-    // Add their user field
-    vil.user = username;
 
     // Convert their list fields into actual lists
     vil.parents  = starStringToList(vil.parents);
@@ -31,7 +22,23 @@ const seedVillagers = (username) => {
 
   console.log(villagers);
 
+  // Prepare a dictionary of vilname: _id pairs
+  const vilDict = {};
+
+  // Save the villagers to the database
+  Villager.create(villagers)
+  .then((vilDocs) => {
+    vilDocs.forEach((vilDoc) => {
+      vilDict[vilDoc.name] = vilDoc._id;
+    });
+  });
+
+  // Return a promise for a list of the villagers' ids
+
 };
+
+
+//======================================================================-HELPERS
 // Convert a .csv file into a list of villager documents
 const readCSV = (filepath) => {
   // Get the filestring

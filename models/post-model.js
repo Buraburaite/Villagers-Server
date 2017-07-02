@@ -3,31 +3,34 @@ const Schema   = mongoose.Schema;
 const ObjectId = Schema.Types.ObjectId;
 
 const commentSchema = new Schema({
-  author : {
-    type : String
+  author: {
+    type: ObjectId,
+    ref: 'Villager'
   },
-  content : {
-    type : String,
-    required : [true, 'No content was provided for the comment']
+  content: {
+    type: String,
+    required: [true, 'No content was provided for the comment']
   }
 },{
-  timestamps : true
+  timestamps: true
 });
 
 const postSchema = new Schema({
-  author : {
-    type : String
+  author: {
+    type: ObjectId,
+    ref: 'Villager'
   },
-  subscribers : {
-    type : [String]
+  subscribers: {
+    type: [ObjectId],
+    ref: 'Villager'
   },
-  content : {
-    type : String,
-    required : [true, 'No content was provided for the post']
+  content: {
+    type: String,
+    required: [true, 'No content was provided for the post']
   },
-  comments : [commentSchema]
+  comments: [commentSchema]
 },{
-  timestamps : true
+  timestamps: true
 });
 
 const Post = mongoose.model('Post', postSchema);

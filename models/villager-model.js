@@ -32,20 +32,24 @@ const villagerSchema = new Schema({
     type: String
   },
   students: {
-    type: [String],
+    type: [ObjectId],
+    ref: 'Villager'
   },
   parents: {
-    type: [String]
+    type: [ObjectId],
+    ref: 'Villager'
   },
   teachers: {
-    type: [String]
+    type: [ObjectId],
+    ref: 'Villager'
   },
   posts: {
     type: [ObjectId],
     ref: 'Post'
   },
   user: {
-    type: String
+    type: ObjectId,
+    ref: 'User'
   }
 },{
   timestamps: true
