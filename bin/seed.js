@@ -2,35 +2,23 @@ const mongoose = require('mongoose');
 const dotenv   = require('dotenv');
 
 const User      = require('../models/vil-model.js');
-const Villager  = require('../models/villager-model.js');
-const Post      = require('../models/post-model.js');
 
 const getHash   = require('./misc.js').getHash;
 
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URI);
 
-User.save(new User(
-  {
-    username: 'test',
-    password: getHash('test')
-  }
-));
+/*==== PSUEDOCODE
 
-Villager.create(villagers, (err, vilDocs) => {
-  if (err) {
-    console.log("Villager create error");
-    throw err;
-  }
+// Account credentials for a test user
+const userCred = { username: 'test', password: getHash('test')};
 
-  vilDocs.forEach((doc) => {
-    doc.save((err) => {
-      if (err) {
-        console.log("Villager save error");
-        throw err;
-      }
-    });
-  });
-}
+// Create the test user
+User.save(new User(testUser));
+
+// Generate default villagers for
+seedVillagers(testUser.username);
+
+====*/
 
 setTimeout(() => mongoose.connection.close(), 5000);
