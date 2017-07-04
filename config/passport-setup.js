@@ -53,6 +53,8 @@ module.exports = function (passportModule) {
     });
   }));
 
+  return passportModule;
+
 
   // Example code for social login, implementing later on
   // passportModule.use(new FBStrategy({

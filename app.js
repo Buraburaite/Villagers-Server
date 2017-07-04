@@ -13,7 +13,11 @@ const MongoStore   = require('connect-mongo')(session);
 const passport     = require('passport');
 
 dotenv.config();
-mongoose.connect(process.env.MONGODB_URI);
+
+
+// Configure and initialize mongoose middleware
+mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
+require('./config/mongoose-setup')(mongoose);
 
 const app = express();
 
@@ -51,9 +55,9 @@ app.use(session({
   saveUninitialized: true
 }));
 
+// Configure and initialize passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
-// Configure and initialize passport middleware
 require('./config/passport-setup')(passport);
 
 //========================================================================ROUTES

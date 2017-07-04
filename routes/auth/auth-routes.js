@@ -3,7 +3,7 @@ const passport   = require('passport');
 const bcrypt     = require('bcrypt');
 
 const User = require('../../models/user-model');
-const createUser = require('./createUser.js');
+const createUser = require('../../bin/createUser.js');
 
 const authRoutes = Router();
 
@@ -25,21 +25,15 @@ authRoutes.post('/login', (req, res, next) => {
       return;
     }
 
-    // If it got to this point, the user was found...
-    .then((foundUser) => {
-      // ...log them into the session...
-      req.login(foundUser, (err) => { // passport attaches this function to req
-        if (err) {
-          res.status(500).json({ message: 'Something went wrong2' });
-          return;
-        }
+    // If it got to this point, the user was found, so log them in...
+    req.login(theUser, (err) => { // passport attaches this function to req
+      if (err) {
+        res.status(500).json({ message: 'Something went wrong2' });
+        return;
+      }
 
-        // ...passing the user object in the request.
-        res.status(200).json(req.user); // passport already attached user to req
-      });
-    })
-    .catch((err) => {
-      res.status(500).json({ message: 'Something went wrong3' });
+      // ...while passing the user object in the request.
+      res.status(200).json(req.user); // passport already attached user to req
     });
 
   })(req, res, next); // Have to pass these, yes it's weird
@@ -91,7 +85,7 @@ authRoutes.post('/signup', (req, res, next) => {
 
     createUser(username, password)
     .then(() => {
-      // Also, we log the user into the session...
+      // Log the user into the session...
       req.login(theUser, (err) => { // passport attaches this method to req
         if (err) {
           res.status(500).json({ message: 'Something went wrong' });
@@ -101,7 +95,7 @@ authRoutes.post('/signup', (req, res, next) => {
         // ...send a response containing the user object to the client, as json
         res.status(200).json(req.user);
       });
-    });
+    })
     .catch((err) => {
       res.status(400).json({ message: 'Something went wrong' });
     });

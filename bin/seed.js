@@ -3,8 +3,10 @@ const dotenv   = require('dotenv');
 
 const createUser = require('./createUser.js');
 
-mongoose.Promise = global.Promise; // quiets an error in Mongoose >= 4.1.0
 dotenv.config();
+
+// Configure and initialize mongoose middleware
+require('./config/mongoose-setup')(mongoose);
 
 // Connect to our local database
 mongoose.connect(process.env.MONGODB_URI,
