@@ -58,20 +58,10 @@ const createSeed = () => {
     villagers: []
   });
 
-  // Prepare a dictionary of vilname: _id pairs
-  const vilDict = {};
-
   // Start our convoluted chain of promises
-  return testUser.save()        // save user
-  .then(createVillagers) // save villagers, giving them the user's id
-  .then((vilDocs) => {
-    vilDocs.forEach((vilDoc) => {
-      vilDict[vilDoc.vilname] = vilDoc._id; // construct vilDict for later
-    });
-    return addVillagersToUser(vilDocs);     // save villagers' ids into the user doc
-  })
-  .then(createPosts)         // save posts, using vilDict to populate fields
-  .then(addPostsToVillagers) // save posts' ids into villagers' docs
+  return testUser.save()     // save user
+  .then(createVillagers)     // save villagers, passing them the user's username
+  .then(createPosts)         // save posts
   .then(() => {
     console.log('connection has been closed at the end of seed');
     mongoose.connection.close();

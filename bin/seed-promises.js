@@ -49,48 +49,43 @@ const createVillagers = (userDoc) => {
   return Villager.create(vilDocs);
 };
 
-const addVillagersToUser = (vilDocs) => {
+const createPosts = (vilDocs) => {
 
   console.log('villagers have been created');
 
-  // Create a list of villager ids
-  const idList = vilDocs.map((vil) => vil._id);
+  const postDocs    = readCSV(__dirname + '/csv/posts.csv');
 
-  // console.log(idList);
+  /*====
+  posts.csv has extra fields for the comments. Here, we put the comments into a
+  list and map each post to a new object without the extra fields, and with the
+  list instead, as described in the Post model.
+  ====*/
+  for (let i = 0; i < postDocs.length; i++) {
+    let post = postDocs[i];
+    let comments = [];
 
-  User.find({ username: vilDocs[0].user })
-  .then((userDoc) => {
-    // userDoc.villagers = idList;
+    let commentCount = 0;
+    while (true) {
+      commentCount++;
+      let author  = post[`com${commentCount}-author`];
+      let content = post[`com${commentCount}-content`];
 
-    console.log('here1: ' + userDoc);
+      if (author) { post.comments.push({ author, content }); }
+      else        { break; }
+    }
 
-    userDoc.villagers = [];
-    vilDocs.forEach((vil) => {
-      userDoc.username = 'fuck you';
-      userDoc.villagers.push(ObjectId(vil._id));
-    });
+    postDocs[i] = {
+      author: post.author,
+      content: post.content,
+      comments
+    };
+  };
 
-    console.log('here2: ' + userDoc);
-
-    return userDoc;
-  })
-  .then((userDoc) => {
-    return userDoc.save();
-  });
-
+  return Post.create(postDocs);
 };
-
-const createPosts = () => {
-
-  console.log('villagers have been added to the user document');
-};
-
-const addPostsToVillagers = (postDocs) => {};
 
 
 module.exports = {
   createVillagers,
-  addVillagersToUser,
-  createPosts,
-  addPostsToVillagers
+  createPosts
 }
