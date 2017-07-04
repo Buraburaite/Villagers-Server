@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
-const ObjectId = Schema.Types.ObjectId;
-const Mixed    = Schema.Types.Mixed;
 
 const villagerSchema = new Schema({
   vilname: {
@@ -33,20 +31,13 @@ const villagerSchema = new Schema({
     type: String
   },
   students: {
-    type: [Mixed],
-    ref: 'Villager'
+    type: [String]
   },
   parents: {
-    type: [Mixed],
-    ref: 'Villager'
+    type: String
   },
   teachers: {
-    type: [Mixed],
-    ref: 'Villager'
-  },
-  posts: {
-    type: [ObjectId],
-    ref: 'Post'
+    type: String
   },
   user: {
     type: String
