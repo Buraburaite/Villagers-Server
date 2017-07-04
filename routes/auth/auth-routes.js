@@ -3,7 +3,7 @@ const passport   = require('passport');
 const bcrypt     = require('bcrypt');
 
 const User = require('../../models/user-model');
-const populateUser = require('./auth-extra-functions').populateUser;
+const createUser = require('./createUser.js');
 
 const authRoutes = Router();
 
@@ -25,11 +25,10 @@ authRoutes.post('/login', (req, res, next) => {
       return;
     }
 
-    // If it got to this point, the user was found, so populate its fields...
-    populateUser(theUser)
-    .then((populatedUser) => {
-      // ...and log them into the session...
-      req.login(populatedUser, (err) => { // passport attaches this function to req
+    // If it got to this point, the user was found...
+    .then((foundUser) => {
+      // ...log them into the session...
+      req.login(foundUser, (err) => { // passport attaches this function to req
         if (err) {
           res.status(500).json({ message: 'Something went wrong2' });
           return;
@@ -90,20 +89,8 @@ authRoutes.post('/signup', (req, res, next) => {
     }
     // ...otherwise, we can go ahead and create the account.
 
-    // First, encrypt their password...
-    const salt     = bcrypt.genSaltSync(16);
-    const hashPass = bcrypt.hashSync(password, salt);
-
-    // ...then, create a new user document to save in our database...
-    const theUser = new User({ username, password: hashPass });
-
-    // ...finally, try to save it in our database
-    theUser.save((err) => {
-      if (err) {
-        res.status(400).json({ message: 'Something went wrong' });
-        return;
-      }
-
+    createUser(username, password)
+    .then(() => {
       // Also, we log the user into the session...
       req.login(theUser, (err) => { // passport attaches this method to req
         if (err) {
@@ -114,6 +101,9 @@ authRoutes.post('/signup', (req, res, next) => {
         // ...send a response containing the user object to the client, as json
         res.status(200).json(req.user);
       });
+    });
+    .catch((err) => {
+      res.status(400).json({ message: 'Something went wrong' });
     });
   });
 });
