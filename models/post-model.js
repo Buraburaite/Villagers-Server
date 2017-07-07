@@ -21,6 +21,9 @@ const postSchema = new Schema({
     type: String,
     required: [true, 'No content was provided for the post']
   },
+  user: {
+    type: String
+  },
   comments: [commentSchema]
 },{
   timestamps: true

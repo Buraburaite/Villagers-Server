@@ -20,6 +20,7 @@ const createUser = (username, password) => {
   return newUser.save()
   .then(createVillagers) // requires the userDoc be passed
   .then(createPosts)
+  .then(() => newUser); // return the user doc at the end
 }
 
 //=====================================================================-PROMISES
@@ -75,6 +76,7 @@ const createPosts = (vilDocs) => {
     postDocs[i] = {
       author: post.author,
       content: post.content,
+      user: vilDocs[0].user,
       comments
     };
   };

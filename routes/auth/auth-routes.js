@@ -36,10 +36,7 @@ authRoutes.post('/login', (req, res, next) => {
       populateUser(theUser.username)
       .then((populatedUser) => {
         // ...while passing the user object in the request.
-        res.status(200).json({
-          username: populatedUser.username,
-          message: "success"
-        }); // passport already attached user to req
+        res.status(200).json(populatedUser); // passport already attached user to req
       })
       .catch((err3) => {
         console.log(err3);
@@ -94,20 +91,26 @@ authRoutes.post('/signup', (req, res, next) => {
     // ...otherwise, we can go ahead and create the account.
 
     createUser(username, password)
-    .then(() => {
+    .then((theUser) => {
       // Log the user into the session...
-      req.login(theUser, (err) => { // passport attaches this method to req
-        if (err) {
-          res.status(500).json({ message: 'Something went wrong' });
+      req.login(theUser, (err2) => { // passport attaches this function to req
+        if (err2) {
+          res.status(500).json({ message: 'Something went wrong2' });
           return;
         }
 
-        // ...send a response containing the user object to the client, as json
-        res.status(200).json(req.user);
+        populateUser(theUser.username)
+        .then((populatedUser) => {
+          // ...while passing the user object in the request.
+          res.status(200).json(populatedUser); // passport already attached user to req
+        })
+        .catch((err3) => {
+          res.status(400).json({ message: 'Something went wrong3' });
+        })
       });
     })
     .catch((err) => {
-      res.status(400).json({ message: 'Something went wrong' });
+      res.status(400).json({ message: 'Something went wrong4' });
     });
   });
 });

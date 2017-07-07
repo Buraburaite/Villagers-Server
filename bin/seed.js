@@ -6,7 +6,7 @@ const createUser = require('./createUser.js');
 dotenv.config();
 
 // Configure and initialize mongoose middleware
-require('./config/mongoose-setup')(mongoose);
+require('../config/mongoose-setup')(mongoose);
 
 // Connect to our local database
 mongoose.connect(process.env.MONGODB_URI,
