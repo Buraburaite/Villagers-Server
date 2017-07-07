@@ -4,6 +4,7 @@ const bcrypt     = require('bcrypt');
 
 const User = require('../../models/user-model');
 const createUser = require('../../bin/createUser.js');
+const populateUser = require('../../bin/populateUser.js');
 
 const authRoutes = Router();
 
@@ -26,14 +27,23 @@ authRoutes.post('/login', (req, res, next) => {
     }
 
     // If it got to this point, the user was found, so log them in...
-    req.login(theUser, (err) => { // passport attaches this function to req
-      if (err) {
+    req.login(theUser, (err2) => { // passport attaches this function to req
+      if (err2) {
         res.status(500).json({ message: 'Something went wrong2' });
         return;
       }
 
-      // ...while passing the user object in the request.
-      res.status(200).json(req.user); // passport already attached user to req
+      populateUser(theUser.username)
+      .then((populatedUser) => {
+        // ...while passing the user object in the request.
+        res.status(200).json({
+          username: populatedUser.username,
+          message: "success"
+        }); // passport already attached user to req
+      })
+      .catch((err3) => {
+        console.log(err3);
+      })
     });
 
   })(req, res, next); // Have to pass these, yes it's weird
