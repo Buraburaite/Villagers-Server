@@ -7,8 +7,6 @@ const populateUser = (username) => {
 
     const populatedUser = { username };
 
-    console.log('got inside populateUser');
-
     Villager.find({ user: username })
     .then((vilDocs) => {
       populatedUser.villagers = vilDocs;

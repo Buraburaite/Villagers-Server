@@ -92,25 +92,10 @@ authRoutes.post('/signup', (req, res, next) => {
 
     createUser(username, password)
     .then((theUser) => {
-      // Log the user into the session...
-      req.login(theUser, (err2) => { // passport attaches this function to req
-        if (err2) {
-          res.status(500).json({ message: 'Something went wrong2' });
-          return;
-        }
-
-        populateUser(theUser.username)
-        .then((populatedUser) => {
-          // ...while passing the user object in the request.
-          res.status(200).json(populatedUser); // passport already attached user to req
-        })
-        .catch((err3) => {
-          res.status(400).json({ message: 'Something went wrong3' });
-        })
-      });
+      res.status(200).json({ message: 'User created successfully' })
     })
     .catch((err) => {
-      res.status(400).json({ message: 'Something went wrong4' });
+      res.status(400).json({ message: 'Something went wrong' });
     });
   });
 });
