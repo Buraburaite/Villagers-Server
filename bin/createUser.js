@@ -13,7 +13,7 @@ const createUser = (username, password) => {
   // Account credentials for a test user
   const newUser = new User({
     username,
-    password: bcrypt.hashSync(password, bcrypt.genSaltSync(16))
+    password: bcrypt.hashSync(password, bcrypt.genSaltSync(4))
   });
 
   // Make the user and their village
