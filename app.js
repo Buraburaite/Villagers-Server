@@ -14,6 +14,7 @@ const passport     = require('passport');
 
 dotenv.config();
 
+console.log('got to app at least, damn');
 
 // Configure and initialize mongoose middleware
 mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
