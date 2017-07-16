@@ -12,6 +12,8 @@ const authRoutes = Router();
 // Route for securely logging in a user
 authRoutes.post('/login', (req, res, next) => {
 
+  console.log('here1');
+
   // Passport's local strategy makes it pretty simple
   passport.authenticate('local', (err, theUser, failureDetails) => {
     // Was there an error with the authentication function?
@@ -20,12 +22,14 @@ authRoutes.post('/login', (req, res, next) => {
       return;
     }
 
+      console.log('here2');
     // If !theUser, then the authentication failed, according to passport docs
     if (!theUser) {
       res.status(401).json(failureDetails);
       return;
     }
 
+      console.log('here3');
     // If it got to this point, the user was found, so log them in...
     req.login(theUser, (err2) => { // passport attaches this function to req
       if (err2) {
@@ -33,6 +37,7 @@ authRoutes.post('/login', (req, res, next) => {
         return;
       }
 
+        console.log('here4');
       populateUser(theUser.username)
       .then((populatedUser) => {
         // ...while passing the user object in the request.
@@ -43,7 +48,7 @@ authRoutes.post('/login', (req, res, next) => {
       })
     });
 
-  })(req, res, next); // Have to pass these, yes it's weird
+  })(req, res, next); // Have to pass these, yes it's weird (guess it's curried for some reason)
 });
 
 //======================================================================= LOGOUT
