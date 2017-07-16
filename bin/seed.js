@@ -25,7 +25,7 @@ mongoose.connect(process.env.MONGODB_URI,
     console.log('db has been dropped');
 
     // Create a test user named 'test' with password 'test'
-    createUser('test', 'test')
+    createUser('test', 'testtest')
     .then(() => {
       mongoose.connection.close();
       console.log('seed created successfully');

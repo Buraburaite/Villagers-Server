@@ -10,7 +10,7 @@ const createUser = (username, password) => {
 
   console.log('creating a new user...');
 
-  // Account credentials for a test user
+  // Account credentials for a the user
   const newUser = new User({
     username,
     password: bcrypt.hashSync(password, bcrypt.genSaltSync(4))

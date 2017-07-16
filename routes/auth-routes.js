@@ -2,9 +2,9 @@ const Router     = require('express').Router;
 const passport   = require('passport');
 const bcrypt     = require('bcrypt');
 
-const User = require('../../models/user-model');
-const createUser = require('../../bin/createUser.js');
-const populateUser = require('../../bin/populateUser.js');
+const User = require('../models/user-model');
+const createUser = require('../bin/createUser.js');
+const populateUser = require('../bin/populateUser.js');
 
 const authRoutes = Router();
 
@@ -48,7 +48,7 @@ authRoutes.post('/login', (req, res, next) => {
 
 //======================================================================= LOGOUT
 // Route for logging out a user
-authRoutes.post('/logout', (req, res, next) => {
+authRoutes.get('/logout', (req, res, next) => {
   req.logout(); // passport function
   res.status(200).json({ message: 'Successful logout' });
 });
