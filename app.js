@@ -14,6 +14,9 @@ const passport     = require('passport');
 
 dotenv.config();
 
+// Check if all required env variables exist
+require('./config/inspectEnv')(process.env);
+
 // Configure and initialize mongoose middleware
 mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
 require('./config/mongoose-setup')(mongoose);
@@ -36,7 +39,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(layouts);
 
-// If we're in development, expose our database to angular's port
+// If we're in development, expose our database to Angular's port
 if (process.env.NODE_ENV === 'development') {
   app.use(cors({
     credentials: true,
