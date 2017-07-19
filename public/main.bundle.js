@@ -1281,8 +1281,8 @@ var SignupFormComponent = (function () {
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
-    production: false,
-    serverBaseUrl: 'http://villagers-staging.herokuapp.com' // Note: don't forget 'http' part!
+    production: true,
+    serverBaseUrl: '' // Note: don't forget 'http' part!
 };
 //# sourceMappingURL=environment.js.map
 
