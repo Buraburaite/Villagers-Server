@@ -1282,7 +1282,7 @@ var SignupFormComponent = (function () {
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 var environment = {
     production: true,
-    serverBaseUrl: '' // Note: don't forget 'http' part!
+    serverBaseUrl: 'http://villagers-staging.herokuapp.com' // Note: don't forget 'http' part!
 };
 //# sourceMappingURL=environment.js.map
 
