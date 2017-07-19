@@ -54,6 +54,8 @@ app.use(session({
   saveUninitialized: true
 }));
 
+console.log('hereee');
+
 // Configure and initialize passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
