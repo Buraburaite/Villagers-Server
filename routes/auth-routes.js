@@ -10,7 +10,7 @@ const authRoutes = Router();
 
 //======================================================================== LOGIN
 // Route for securely logging in a user
-authRoutes.post('login', (req, res, next) => {
+authRoutes.post('/login', (req, res, next) => { //!!!!!!!!!!!!!!!!!!!1 removed / from url
 
   console.log('here1');
 
