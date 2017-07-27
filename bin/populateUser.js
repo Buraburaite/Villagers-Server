@@ -1,6 +1,8 @@
 const Villager  = require('../models/villager-model.js');
 const Post      = require('../models/post-model.js');
 
+// Populate the User doc with its corresponding
+// villagers and their posts
 const populateUser = (username) => {
 
   return new Promise((resolve, reject) => {

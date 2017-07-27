@@ -34,10 +34,10 @@ const villagerSchema = new Schema({
     type: [String]
   },
   parents: {
-    type: String
+    type: [String]
   },
   teachers: {
-    type: String
+    type: [String]
   },
   user: {
     type: String
