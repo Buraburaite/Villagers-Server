@@ -7,4 +7,4 @@ raphaelGomez,testtest,student,Raphael Gomez,Raphael,Gomez,Dade High School,,raph
 benjaminDunn,testtest,student,Benjamin Dunn,Benjamin,Dunn,Dade High School,,benjaminDunn.jpg,pamelaDunn,raphaelGomez,pistachio,
 brendanHolmes,testtest,student,Brendan Holmes,Brendan,Holmes,Dade Middle School,,brendanHolmes.jpg,danaHolmes,sallyGomez,blueberry,
 blueberry,testtest,teacher,Ms. Blueberry,Samantha,Blueberry,Dade Middle School,Math,blueberry.jpg,timonGomez*danaHolmes,sallyGomez*brendanHolmes,,
-pistachio,testtest,teacher,The Pistachio,Terrance,Pistachie,Dade High School,History,pistachio.jpg,timonGomez*PamelaDunn,raphaelGomez*benjaminDunn,,
+pistachio,testtest,teacher,The Pistachio,Terrance,Pistachie,Dade High School,History,pistachio.jpg,timonGomez*pamelaDunn,raphaelGomez*benjaminDunn,,
