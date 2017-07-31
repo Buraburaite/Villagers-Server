@@ -472,7 +472,7 @@ var HomeRouteComponent = (function () {
     function HomeRouteComponent(session, state) {
         this.session = session;
         this.state = state;
-        this.picPath = 'src/assets/profile-pictures/';
+        this.picPath = 'assets/profile-pictures/';
         // this.session.login({
         //   username: 'test',
         //   password: 'test'
